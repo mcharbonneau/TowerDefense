@@ -18,9 +18,12 @@ namespace TowerDefense.Affectors
 		
 		private void Update()
 		{
-			Debug.Log(m_towerTargetter.GetAllTargets().Count);
-			foreach (var target in m_towerTargetter.GetAllTargets())
+			var targets = m_towerTargetter.GetAllTargets();
+			
+			// Since targets can die and be removed from the list, we need to iterate backwards
+			for (var i = targets.Count - 1; i >= 0; i--)
 			{
+				var target = targets[i];
 				var damage = m_damageRate * Time.deltaTime;
 				target.TakeDamage(damage, target.position, m_alignment);
 			}

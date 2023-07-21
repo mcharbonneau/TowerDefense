@@ -109,7 +109,7 @@ namespace TowerDefense.UI.HUD
 				upgradeModifierButton.gameObject.SetActive(canUpgrade);
 				if (canUpgrade)
 				{
-					var descriptionText = "Upgrade Modifier";
+					var descriptionText = m_Tower.GetModifierDescription();
 					upgradeModifierDescription.text = descriptionText.ToUpper();
 				}
 			}

@@ -2,6 +2,7 @@ using System;
 using ActionGameFramework.Health;
 using Core.Utilities;
 using TowerDefense.Level;
+using TowerDefense.Towers.Data;
 using TowerDefense.Towers.Placement;
 using TowerDefense.UI.HUD;
 using UnityEngine;
@@ -17,6 +18,18 @@ namespace TowerDefense.Towers
 		/// The tower levels associated with this tower
 		/// </summary>
 		public TowerLevel[] levels;
+		
+		/// <summary>
+		/// The tower levels associated with this tower, but with the modifier applied.
+		/// This is not the cleanest way to go about it, but it would require a lot of refactoring to do it properly,
+		/// which is out of the scope of this test.
+		/// </summary>
+		public TowerLevel[] modifiedLevels;
+
+		/// <summary>
+		/// The tower levels associated with this tower
+		/// </summary>
+		public TowerModifierData modifierData;
 
 		/// <summary>
 		/// A generalised name common to a levels
@@ -56,7 +69,7 @@ namespace TowerDefense.Towers
 		/// </summary>
 		public bool canUpgradeModifier
 		{
-			get { return !hasUpgradedModifier; }
+			get { return !hasUpgradedModifier && modifierData != null && modifiedLevels.Length > 0; }
 		}
 
 		/// <summary>
@@ -147,7 +160,16 @@ namespace TowerDefense.Towers
 			{
 				return -1;
 			}
-			return 14;
+			return modifierData.modifierCost;
+		}
+
+		public string GetModifierDescription()
+		{
+			if (!canUpgradeModifier)
+			{
+				return null;
+			}
+			return modifierData.modifierDescription;
 		}
 
 		/// <summary>
@@ -175,10 +197,12 @@ namespace TowerDefense.Towers
 		/// <returns>A sell value of the tower</returns>
 		public int GetSellLevel(int level)
 		{
+			var modifierCost = hasUpgradedModifier ? modifierData.modifierCost : 0;
+			
 			// sell for full price if waves haven't started yet
 			if (LevelManager.instance.levelState == LevelState.Building)
 			{
-				int cost = 0;
+				int cost = modifierCost;
 				for (int i = 0; i <= level; i++)
 				{
 					cost += levels[i].cost;
@@ -186,7 +210,9 @@ namespace TowerDefense.Towers
 
 				return cost;
 			}
-			return levels[currentLevel].sell;
+			
+			// Give back half the cost of the modifier, if it applies
+			return levels[currentLevel].sell + (modifierCost / 2);
 		}
 
 		/// <summary>
@@ -199,7 +225,7 @@ namespace TowerDefense.Towers
 				return false;
 			}
 			
-			SetLevel(currentLevel + 1, hasUpgradedModifier);
+			SetLevel(currentLevel + 1);
 			
 			return true;
 		}
@@ -214,11 +240,8 @@ namespace TowerDefense.Towers
 				return false;
 			}
 			
-			// TODO: Implement modifier upgrade
-			Debug.Log("Upgraded Modifier");
 			hasUpgradedModifier = true;
-			
-			SetLevel(currentLevel + 1, true);
+			SetLevel(currentLevel);
 			
 			return true;
 		}
@@ -290,7 +313,9 @@ namespace TowerDefense.Towers
 		/// </summary>
 		protected void SetLevel(int level)
 		{
-			if (level < 0 || level >= levels.Length)
+			var levelsToUse = hasUpgradedModifier ? modifiedLevels : levels;
+			
+			if (level < 0 || level >= levelsToUse.Length)
 			{
 				return;
 			}
@@ -301,7 +326,7 @@ namespace TowerDefense.Towers
 			}
 
 			// instantiate the visual representation
-			currentTowerLevel = Instantiate(levels[currentLevel], transform);
+			currentTowerLevel = Instantiate(levelsToUse[currentLevel], transform);
 
 			// initialize TowerLevel
 			currentTowerLevel.Initialize(this, enemyLayerMask, configuration.alignmentProvider);
