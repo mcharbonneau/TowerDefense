@@ -2679,7 +2679,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +2 DPS, 2 RANGE
+  m_Text: UPGRADE MODIFIER
 --- !u!1 &6636930117023024822
 GameObject:
   m_ObjectHideFlags: 0
