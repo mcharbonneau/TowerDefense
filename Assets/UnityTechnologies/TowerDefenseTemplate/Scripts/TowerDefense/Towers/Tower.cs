@@ -198,7 +198,9 @@ namespace TowerDefense.Towers
 			{
 				return false;
 			}
-			SetLevel(currentLevel + 1);
+			
+			SetLevel(currentLevel + 1, hasUpgradedModifier);
+			
 			return true;
 		}
 
@@ -207,7 +209,7 @@ namespace TowerDefense.Towers
 		/// </summary>
 		public virtual bool UpgradeTowerModifier()
 		{
-			if (isAtMaxLevel)
+			if (!canUpgradeModifier)
 			{
 				return false;
 			}
@@ -215,6 +217,8 @@ namespace TowerDefense.Towers
 			// TODO: Implement modifier upgrade
 			Debug.Log("Upgraded Modifier");
 			hasUpgradedModifier = true;
+			
+			SetLevel(currentLevel + 1, true);
 			
 			return true;
 		}
