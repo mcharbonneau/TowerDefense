@@ -12,20 +12,20 @@ namespace TowerDefense.Affectors
 	/// </summary>
 	public class ProximityDamageAffector : Affector
 	{
-		[SerializeField] private float m_damageRate = 0.1f;
-		[SerializeField] private SimpleAlignment m_alignment;
-		[SerializeField] private Targetter m_towerTargetter;
+		[SerializeField] private float m_DamageRate = 0.1f;
+		[SerializeField] private SimpleAlignment m_Alignment;
+		[SerializeField] private Targetter m_TowerTargetter;
 		
 		private void Update()
 		{
-			var targets = m_towerTargetter.GetAllTargets();
+			var targets = m_TowerTargetter.GetAllTargets();
 			
 			// Since targets can die and be removed from the list, we need to iterate backwards
 			for (var i = targets.Count - 1; i >= 0; i--)
 			{
 				var target = targets[i];
-				var damage = m_damageRate * Time.deltaTime;
-				target.TakeDamage(damage, target.position, m_alignment);
+				var damage = m_DamageRate * Time.deltaTime;
+				target.TakeDamage(damage, target.position, m_Alignment);
 			}
 		}
 	}

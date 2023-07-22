@@ -269,9 +269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Proximity Damage Modifier
-  m_damageRate: 0.5
-  m_alignment: {fileID: 11400000, guid: 2e20cdb38c63f4edf8ee385c50c089ce, type: 2}
-  m_towerTargetter: {fileID: 114009077384321918}
+  m_DamageRate: 0.5
+  m_Alignment: {fileID: 11400000, guid: 2e20cdb38c63f4edf8ee385c50c089ce, type: 2}
+  m_TowerTargetter: {fileID: 114009077384321918}
 --- !u!1 &1751241635366000
 GameObject:
   m_ObjectHideFlags: 0
