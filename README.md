@@ -1,7 +1,7 @@
 # TowerDefense
 
 ## Step 2, Option B
-For the extension, I chose to extend the behavior of 3 of the towers with what I called modifier upgrades. These are available in the tower menu under the upgrade button and allow the player to add a modification to the tower by paying a fee, upgrading, and changing how it behaves. This design adds another layer of customization to the player’s towers, making it less linear than it was originally.
+For the extension, I chose to extend the behavior of 3 of the towers with what I called modifier upgrades. These are available in the tower menu under the upgrade button and allow the player to add a modification to the tower by paying a fee, upgrading, and changing how it behaves. This design results in a less linear upgrade tree.
 
 The upgrades are as follows:
 - The assault cannon can be modified to only attack flying enemies, but with a 50% higher rate of fire at any given level, to make it into an anti-aircraft specialist. I felt that flying enemies could be an issue when they were moving in the middle of a group of other units since the AOE tower couldn’t hit them, and other towers could focus on any other towers. With this upgrade, the player now has the option to spend to make a tower that will alleviate the issue.
