@@ -12,3 +12,21 @@ The upgrades are as follows:
 After testing the design, it does allow for fun combinations with the shapes of the maze that the player can make. A plasma lance with the modification can deal a lot of damage if it’s at one end of a long corridor. A modified EMP tower can be very useful if it’s placed at a corner, allowing it to attack any number of units around itself. It also gives synergy with its slowing effect since slowing a unit will make it move slower in its range, allowing for more damage. It won’t single-handedly kill many units, but can weaken a bunch of them before they get picked up by other towers. As for the assault cannon, it covers a role that was lacking before. However, I think both the plasma lance and the EMP tower throw off the balancing of the game a bit. A well-positioned plasma lance can be absolutely devastating, same for the EMP tower, so their cost or their strength should probably be balanced more adequately. Also, since the modification effects scale with the level, upgrading a level should be more expensive with the modification, and the modification should be more expensive with higher levels. I also added two towers with AOE, which may be a bit much in the current state of the game.
 
 As for the code, in order to fit into the code structure of the existing project, I added modified versions of each tower level’s prefab, so it effectively doubles the number of prefabs. I feel this system would not be the best option for a real project. The number of different prefabs would become untenable, so a major refactor of the entire upgrade system would be needed. I also followed the naming convention of the existing project, but it feels a bit all over the place, so that would probably need to be refactored as well. I also added code to already sprawling classes like Tower and TowerUI, and those would ideally benefit from being split in order to respect the single responsibility principle.
+
+## Notes
+It took a bit more time than I thought it would, because some of my original ideas were too complicated to implement in the existing project for the scope of this test, so they were abandoned. It took me approximately 8 hours of active work to complete this.
+
+On top of multiple prefabs and scriptable objects I modified and created for the 3 different towers (EMP, MachineGun, Laser) and TowerControllerUI.prefab, here are lists of script changes I did.
+
+I modified:
+- TowerUI.cs
+- Tower.cs
+- GameUI.cs
+
+I created:
+- PiercingHitscanAttack.cs
+- PiercingHitscanLauncher.cs
+- ProximityDamageAffector.cs
+- TowerModifierData.cs
+
+You can also check the git commits I made for this test, but please note that the initial commit already had some changes made for the modifier upgrade system.
