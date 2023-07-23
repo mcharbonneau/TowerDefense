@@ -151,9 +151,9 @@ namespace TowerDefense.Towers
 		}
 
 		/// <summary>
-		/// Provides information on the cost to upgrade
+		/// Provides information on the cost to upgrade the modifier
 		/// </summary>
-		/// <returns>Returns -1 if the towers is already at max level, other returns the cost to upgrade</returns>
+		/// <returns>Returns -1 if the towers can't be modified, or the modifier cost if it can</returns>
 		public int GetCostForModifier()
 		{
 			if (!canUpgradeModifier)
@@ -231,7 +231,7 @@ namespace TowerDefense.Towers
 		}
 
 		/// <summary>
-		/// Used to (try to) upgrade the tower data
+		/// Used to (try to) upgrade the tower modifier
 		/// </summary>
 		public virtual bool UpgradeTowerModifier()
 		{

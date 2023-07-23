@@ -50,6 +50,9 @@ namespace TowerDefense.Towers.TowerLaunchers
 			
 			var origin = firingPoint.position;
 			var targetPosition = enemy.position;
+			
+			// The VFX needs to go in a straight horizontal line,
+			// so the VFX and the capsule cast are not influenced by the target's height
 			targetPosition.y = origin.y;
 			
 			RunCapsuleCast(targetPosition, origin);
@@ -69,6 +72,8 @@ namespace TowerDefense.Towers.TowerLaunchers
 			var point1 = origin + capsuleSide;
 			var point2 = origin - capsuleSide;
 
+			// The capsule cast is used so the cast goes in a straight horizontal line, but hits enemies at any height.
+			// The capsule that is cast is oriented vertically for this reason.
 			var count = Physics.
 				CapsuleCastNonAlloc(point1, point2, m_CapsuleRadius, direction, m_Hits, m_Distance, m_LayerMask.value);
 			

@@ -473,7 +473,7 @@ namespace TowerDefense.UI.HUD
 		}
 
 		/// <summary>
-		/// Upgrades <see cref="currentSelectedTower" />, if possible
+		/// Upgrades <see cref="currentSelectedTower" /> modifier, if possible
 		/// </summary>
 		/// <exception cref="InvalidOperationException">
 		/// Throws exception when selecting tower when <see cref="State" /> does not equal <see cref="State.Normal" />

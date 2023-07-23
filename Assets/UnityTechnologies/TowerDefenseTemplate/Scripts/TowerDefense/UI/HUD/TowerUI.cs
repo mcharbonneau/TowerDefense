@@ -100,11 +100,23 @@ namespace TowerDefense.UI.HUD
 				}
 			}
 			
+			InitializeModifierButton();
+			
+			LevelManager.instance.currency.currencyChanged += OnCurrencyChanged;
+			towerInfoDisplay.Show(towerToShow);
+			foreach (var button in confirmationButtons)
+			{
+				button.SetActive(false);
+			}
+		}
+
+		private void InitializeModifierButton()
+		{
 			if (upgradeModifierButton != null)
 			{
-				upgradeModifierButton.interactable = 
+				upgradeModifierButton.interactable =
 					LevelManager.instance.currency.CanAfford(m_Tower.GetCostForModifier());
-				
+
 				var canUpgrade = m_Tower.canUpgradeModifier;
 				upgradeModifierButton.gameObject.SetActive(canUpgrade);
 				if (canUpgrade)
@@ -112,13 +124,6 @@ namespace TowerDefense.UI.HUD
 					var descriptionText = m_Tower.GetModifierDescription();
 					upgradeModifierDescription.text = descriptionText.ToUpper();
 				}
-			}
-			
-			LevelManager.instance.currency.currencyChanged += OnCurrencyChanged;
-			towerInfoDisplay.Show(towerToShow);
-			foreach (var button in confirmationButtons)
-			{
-				button.SetActive(false);
 			}
 		}
 
@@ -145,7 +150,7 @@ namespace TowerDefense.UI.HUD
 		}
 
 		/// <summary>
-		/// Upgrades the tower through <see cref="GameUI"/>
+		/// Upgrades the tower modifier through <see cref="GameUI"/>
 		/// </summary>
 		public void UpgradeModifierButtonClick()
 		{
